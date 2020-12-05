@@ -1,20 +1,20 @@
 #include "Arduino.h"
 #include "MorseBinNET.h"
 #include "MorseBin.h"
-MorseBinNET::MorseBinNET(string adress, int pinTransmit,int pinReceive){
+MorseBinNET::MorseBinNET(String address, int pinTransmit,int pinReceive){
 	_pinTransmit = pinTransmit;
 	_pinReceive = pinReceive;
 	_address = adress;
 	pinMode(_pinTransmit,OUTPUT);
 	pinMode(_pinReceive,INPUT);
 }
-MorseBinNET::void send(string address, string data1, string data2){
+void MorseBinNET::send(String address, String data1, String data2){
 	MBSendByte(address);
 	MBSendByte(_address);
 	MBSendByte(data1);
 	MBSendByte(data2);	
 }
-MorseBinNET::string receive(){
+string MorseBinNET::receive(){
 	string incomingAddress = MBReceive(_pinReceive);
 	if(incomingAddress=="errTimeout"){
 		return "errTimeout"
