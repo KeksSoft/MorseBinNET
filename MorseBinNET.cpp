@@ -4,39 +4,43 @@
 MorseBinNET::MorseBinNET(String address, int pinTransmit,int pinReceive){
 	_pinTransmit = pinTransmit;
 	_pinReceive = pinReceive;
-	_address = adress;
+	_address = address;
 	pinMode(_pinTransmit,OUTPUT);
 	pinMode(_pinReceive,INPUT);
 }
 void MorseBinNET::send(String address, String data1, String data2){
-	MBSendByte(address);
-	MBSendByte(_address);
-	MBSendByte(data1);
-	MBSendByte(data2);	
+	MBSendByte(address,_pinReceive);
+	MBSendByte(_address,_pinReceive);
+	MBSendByte(data1,_pinReceive);
+	MBSendByte(data2,_pinReceive);	
 }
-string MorseBinNET::receive(){
-	string incomingAddress = MBReceive(_pinReceive);
+char** MorseBinNET::receive(){
+	String incomingAddress = MBReceive(_pinReceive);
 	if(incomingAddress=="errTimeout"){
-		return "errTimeout"
+		static char *dataoutput[] = {"errTimeout"};
+		return dataoutput;
 	}
-	string senderAddress = MBReceive(_pinReceive);
+	String senderAddress = MBReceive(_pinReceive);
 	if(senderAddress=="errTimeout"){
-		return "errTimeout"
+		static char *dataoutput[] = {"errTimeout"};
+		return dataoutput;
 	}
-	string data1 = MBReceive(_pinReceive);
+	String data1 = MBReceive(_pinReceive);
 	if(data1=="errTimeout"){
-		return "errTimeout"
+		static char *dataoutput[] = {"errTimeout"};
+		return dataoutput;
 	}
-	string data2 = MBReceive(_pinReceive);
+	String data2 = MBReceive(_pinReceive);
 	if(data2=="errTimeout"){
-		return "errTimeout"
+		static char *dataoutput[] = {"errTimeout"};
+		return dataoutput;
 	}
 	if (incomingAddress==_address){
-		string dataoutput = {senderAddress,data1,data2}
+		static char *dataoutput[] = {senderAddress, data1, data2};
 		return dataoutput;
 	}
 	else{
-		return "errWrongAddress"
+		static char *dataoutput[] = {"errWrongAddress"};
+		return dataoutput;
 	}
-	
 }
