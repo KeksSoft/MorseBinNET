@@ -14,33 +14,29 @@ void MorseBinNET::send(String address, String data1, String data2){
 	MBSendByte(data1,_pinReceive);
 	MBSendByte(data2,_pinReceive);	
 }
-char** MorseBinNET::receive(){
+void MorseBinNET::receive(){
 	String incomingAddress = MBReceive(_pinReceive);
 	if(incomingAddress=="errTimeout"){
-		static char *dataoutput[] = {"errTimeout"};
-		return dataoutput;
+		MBNETerrorlevel[0]="errTimeout";
 	}
 	String senderAddress = MBReceive(_pinReceive);
 	if(senderAddress=="errTimeout"){
-		static char *dataoutput[] = {"errTimeout"};
-		return dataoutput;
+		MBNETerrorlevel[0]="errTimeout";
 	}
 	String data1 = MBReceive(_pinReceive);
 	if(data1=="errTimeout"){
-		static char *dataoutput[] = {"errTimeout"};
-		return dataoutput;
+		MBNETerrorlevel[0]="errTimeout";
 	}
 	String data2 = MBReceive(_pinReceive);
 	if(data2=="errTimeout"){
-		static char *dataoutput[] = {"errTimeout"};
-		return dataoutput;
+		MBNETerrorlevel[0]="errTimeout";
 	}
 	if (incomingAddress==_address){
-		static char *dataoutput[] = {senderAddress, data1, data2};
-		return dataoutput;
+		MBNETerrorlevel[0] = senderAddress;
+		MBNETerrorlevel[1] = data1;
+		MBNETerrorlevel[2] = data2;
 	}
 	else{
-		static char *dataoutput[] = {"errWrongAddress"};
-		return dataoutput;
+		MBNETerrorlevel = {"errWrongAddress"};
 	}
 }

@@ -6,7 +6,8 @@
 		public:
 			MorseBinNET(String address, int pinTransmit,int pinReceive);
 			void send(String address, String data1, String data2);
-			char ** receive();
+			void receive();
+			extern char * MBNETerrorlevel[3]; 
 			//String placeRequest(String address, String data1, String data2);
 			//String answerRequest(String data1, String data2)
 		private:
