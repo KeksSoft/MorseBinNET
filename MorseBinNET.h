@@ -1,8 +1,6 @@
 #ifndef MorseBinNET_h
 #define MorseBinNET_h
 #include "Arduino.h"
-<<<<<<< Updated upstream
-=======
 #include "MorseBin.h"
 	class MorseBinNET {
 		public:
@@ -16,6 +14,4 @@
 			int _pinTransmit;
 			int _pinReceive;
 	};
->>>>>>> Stashed changes
-
 #endif
