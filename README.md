@@ -12,3 +12,4 @@ MorseBinNet is a networked version of MorseBin. No adresses are reserved, so you
      <p>String data1 = received.substring(8, 15);
     <p>String data2 = received.substring(16, 24);
   <p>}
+    <p> in the first line, the data is received, note that "net" is the object. Then, the program checks, if there were any errors thrown, e.g. a Timeout or if the message wasn't intended for the board. After that, the String "received" should be three MorseBin formatted Strings joint together, so we're splitting them with the substring() function of Arduino. Now, you can use the strings "senderAdress", "data1" and "data2". in this case, "senderAdress" contains the adress of the board, which sent the message. "data1" and "data2" contain the data, which was send over.
