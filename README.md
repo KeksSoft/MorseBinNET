@@ -6,9 +6,9 @@ MorseBinNet is a networked version of MorseBin. No adresses are reserved, so you
   this is a method of the class MorseBinNet. it sends your data to the address you specified in the first parameter, which NEEDS to be a MorseBin formatted string. "data1" and "data2" are also MorseBin formatted strings, which is the data you're going to send.
 # String receive();
   this method returns a string, which due to the limitations of C++ needs to be processed a bit furhter. My recomendation is this piece of software:
-  String received = net.receive();
-  if (received != "errWrongAddress" && received != "errTimeout") {
-    String senderAddress = received.substring(0, 7);
-    String data1 = received.substring(8, 15);
-    String data2 = received.substring(16, 24);
-  }
+  <p>String received = net.receive();
+  <p>if (received != "errWrongAddress" && received != "errTimeout") {
+     <p>String senderAddress = received.substring(0, 7);
+     <p>String data1 = received.substring(8, 15);
+    <p>String data2 = received.substring(16, 24);
+  <p>}
