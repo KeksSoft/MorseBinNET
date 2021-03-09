@@ -1,3 +1,5 @@
+# This Wiki is horrible! Don't use it!
+
 # MorseBinNET
 MorseBinNet is a networked version of MorseBin. No adresses are reserved, so you can just pick one! In addition, it uses two pins, one for transmitting, and one for receiving. MorseBin is MANDATORY! if you have MorseBin not installed and "#included" it, MorseBinNet will not work! in other words, MorseBin is a dependency!
 # Electrical Informations
