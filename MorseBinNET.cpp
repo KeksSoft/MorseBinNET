@@ -9,6 +9,14 @@ MorseBinNET::MorseBinNET(String address, int pinTransmit,int pinReceive){
 	pinMode(_pinReceive,INPUT);
 }
 void MorseBinNET::send(String address, String data1, String data2){
+	int securityTimer = 0;
+	while(securityTimer < 15){
+		securityTimer++;
+		if(digitalRead(_pinReceive) == HIGH){
+			securityTimer = 0;
+		}
+		delay(1);
+	}
 	MBSendByte(address,_pinTransmit);
 	MBSendByte(_address,_pinTransmit);
 	MBSendByte(data1,_pinTransmit);
