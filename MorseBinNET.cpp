@@ -48,3 +48,34 @@ String MorseBinNET::receive(){
 		return "errWrongAddress";
 	}
 }
+String MorseBinNET::placeRequest(String address, String data1, String data2) {
+	send(address, data1, data2);
+	String senderAddress = "";
+	String senderData1;
+	String senderData2;
+	int timeoutCounter = 0;
+	int wrongAddressCounter = 0;
+	while(senderAddress != address){
+		String received = receive();
+		if (received != "errWrongAddress" && received != "errTimeout") {
+			senderAddress = received.substring(0,8);
+			senderData1 = received.substring(8,16);
+			senderData2 = received.substring(16,24);
+		} else {
+			if (received == "errTimeout"){
+				timeoutCounter++;
+				if(timeoutCounter >= 6){
+					return "errTimeout";
+				}
+			}
+			if (received == "errWrongAddress"){
+				wrongAddressCounter++;
+				if(wrongAddressCounter >= 20){
+					return "errTimeout";
+				}
+			}
+		}
+	}
+	String toBeReturnd = senderAddress + senderData1 + senderData2;
+	return toBeReturnd;
+}
